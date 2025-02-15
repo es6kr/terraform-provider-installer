@@ -74,7 +74,10 @@ func Install(ctx context.Context, name, version string, env []string) error {
 
 	out, err := cmd.CombinedOutput()
 	if err != nil {
-		return errors.Wrap(errors.WithDetail(err, string(out)), strings.Join(cmd.Args, " "))
+		outputStr := string(out)
+		if !strings.Contains(outputStr, "is already installed") {
+			return errors.Wrap(errors.WithDetail(err, outputStr), strings.Join(cmd.Args, " "))
+		}
 	}
 
 	return nil
