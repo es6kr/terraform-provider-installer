@@ -8,11 +8,9 @@ import (
 var ErrNotInstalled = errors.New("not installed")
 
 func ToDiags(err error) diag.Diagnostics {
-	return diag.Diagnostics{
-		diag.Diagnostic{
-			Severity: diag.Error,
-			Summary:  err.Error(),
-			Detail:   errors.FlattenDetails(err),
-		},
-	}
+	return []diag.Diagnostic{{
+		Severity: diag.Error,
+		Summary:  err.Error(),
+		Detail:   errors.FlattenDetails(err),
+	}}
 }
