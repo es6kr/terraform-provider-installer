@@ -23,7 +23,7 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y pandoc
           go install github.com/mrtazz/checkmake/cmd/checkmake@ca982aef0af387413edc4b515880bef071730dea
-      - uses: hashicorp/setup-terraform@v2
+      - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.1.4
           terraform_wrapper: false
@@ -53,9 +53,10 @@ jobs:
           terraform_wrapper: false
       - run: sudo apt-get install -y sl
       - run: |
+          TF_BIN="$(which terraform)"   # capture setup-terraform binary before asdf shims can shadow PATH
           git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.16.2
           . $HOME/.asdf/asdf.sh
-          export TF_ACC_TERRAFORM_PATH="$(which terraform)"
+          export TF_ACC_TERRAFORM_PATH="$TF_BIN"
           make TESTARGS="-tags=apt" testacc
 
   tests-macos:
@@ -74,7 +75,8 @@ jobs:
           terraform_wrapper: false
       - run: brew install sl
       - run: |
+          TF_BIN="$(which terraform)"   # capture setup-terraform binary before asdf shims can shadow PATH
           [ -f "$HOME/.asdf/asdf.sh" ] || git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.16.2
           . $HOME/.asdf/asdf.sh
-          export TF_ACC_TERRAFORM_PATH="$(which terraform)"
+          export TF_ACC_TERRAFORM_PATH="$TF_BIN"
           make TESTARGS="-tags=brew" testacc
