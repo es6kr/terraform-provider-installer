@@ -34,14 +34,14 @@ jobs:
       - uses: terraform-linters/setup-tflint@v6
         with:
           tflint_version: v0.34.1
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: pre-commit/action@v3.0.1
 
   tests-ubuntu:
     name: Run acceptance tests on Ubuntu
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-go@v6.5.0
         with:
           go-version: ${{env.GO_VERSION}}
@@ -63,7 +63,7 @@ jobs:
     name: Run acceptance tests on macOS
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-go@v6.5.0
         with:
           go-version: ${{env.GO_VERSION}}
