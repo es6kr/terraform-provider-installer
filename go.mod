@@ -5,7 +5,7 @@ go 1.25.8
 require (
 	github.com/cockroachdb/errors v1.14.0
 	github.com/hashicorp/terraform-plugin-docs v0.25.0
-	github.com/hashicorp/terraform-plugin-log v0.10.0
+	github.com/hashicorp/terraform-plugin-log v0.11.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.40.1
 	gotest.tools/v3 v3.5.2
 )
